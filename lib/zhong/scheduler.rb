@@ -113,7 +113,7 @@ module Zhong
     end
 
     def redis_time
-      s, ms = redis.time # returns [seconds since epoch, microseconds]
+      s, ms = redis.with(&:time) # returns [seconds since epoch, microseconds]
       now = Time.at(s + ms / (10**6))
       tz ? now.in_time_zone(tz) : now
     end
@@ -145,7 +145,7 @@ module Zhong
     end
 
     def heartbeat(time)
-      redis.hset(heartbeat_key, heartbeat_field, time.to_i)
+      redis.with { |r| r.hset(heartbeat_key, heartbeat_field, time.to_i) }
     end
 
     def heartbeat_field

@@ -42,15 +42,17 @@ module Zhong
   end
 
   def self.all_heartbeats
-    heartbeats = redis.hgetall(heartbeat_key)
+    heartbeats = redis.with { |r| r.hgetall(heartbeat_key) }
     now = redis_time
 
     old_beats, new_beats = heartbeats.partition do |_, v|
       Time.at(v.to_i) < (now - 15.minutes)
     end
 
-    redis.multi do
-      old_beats.each { |b| redis.hdel(heartbeat_key, b) }
+    redis.with do |r|
+      r.multi do |rr|
+        old_beats.each { |b| rr.hdel(heartbeat_key, b) }
+      end
     end
 
     new_beats.map do |k, v|

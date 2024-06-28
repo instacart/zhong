@@ -91,24 +91,24 @@ module Zhong
     end
 
     def refresh_last_ran
-      last_ran_val = redis.get(last_ran_key)
+      last_ran_val = redis.with { |r| r.get(last_ran_key) }
       @last_ran = last_ran_val ? Time.at(last_ran_val.to_i) : nil
     end
 
     def disable
       fire_callbacks(:before_disable, self)
-      redis.set(disabled_key, "true")
+      redis.with { |r| r.set(disabled_key, "true") }
       fire_callbacks(:after_disable, self)
     end
 
     def enable
       fire_callbacks(:before_enable, self)
-      redis.del(disabled_key)
+      redis.with { |r| r.del(disabled_key) }
       fire_callbacks(:after_enable, self)
     end
 
     def disabled?
-      !redis.get(disabled_key).nil?
+      !redis.with { |r| r.get(disabled_key) }.nil?
     end
 
     def to_s
@@ -122,7 +122,7 @@ module Zhong
     end
 
     def clear
-      redis.del(last_ran_key)
+      redis.with { |r| r.del(last_ran_key) }
     end
 
     def last_ran_key
@@ -152,7 +152,7 @@ module Zhong
     # if the @at value is changed across runs, the last_run becomes invalid
     # so clear it
     def clear_last_ran_if_at_changed
-      previous_at_msgpack = redis.get(desired_at_key)
+      previous_at_msgpack = redis.with { |r| r.get(desired_at_key) }
 
       if previous_at_msgpack
         previous_at = At.deserialize(previous_at_msgpack)
@@ -163,7 +163,7 @@ module Zhong
         end
       end
 
-      redis.set(desired_at_key, @at.serialize)
+      redis.with { |r| r.set(desired_at_key, @at.serialize) }
     end
 
     def run_every?(time)
@@ -180,7 +180,7 @@ module Zhong
 
     def ran!(time)
       @last_ran = time
-      redis.set(last_ran_key, @last_ran.to_i)
+      redis.with { |r| r.set(last_ran_key, @last_ran.to_i) }
     end
 
     def redis_lock
