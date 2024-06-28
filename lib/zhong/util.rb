@@ -4,7 +4,7 @@ module Zhong
       if keys.empty?
         {}
       else
-        Zhong.redis.mapped_mget(*keys)
+        Zhong.redis.with { |r| r.mapped_mget(*keys) }
       end
     end
 
