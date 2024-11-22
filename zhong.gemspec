@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Reliable, distributed cron.}
   spec.description   = %q{Reliable, distributed cron.}
-  spec.homepage      = "https://www.github.com/nickelser/zhong"
+  spec.homepage      = "https://www.github.com/instacart/zhong"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

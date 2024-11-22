@@ -1,4 +1,4 @@
-# Zhong [![Build Status](https://github.com/nickelser/zhong/workflows/CI/badge.svg)](https://github.com/nickelser/zhong/actions?query=workflow%3ACI) [![Code Climate](https://codeclimate.com/github/nickelser/zhong/badges/gpa.svg)](https://codeclimate.com/github/nickelser/zhong) [![Gem Version](https://badge.fury.io/rb/zhong.svg)](http://badge.fury.io/rb/zhong)
+# Zhong [![Build Status](https://github.com/instacart/zhong/workflows/CI/badge.svg)](https://github.com/instacart/zhong/actions?query=workflow%3ACI) [![Gem Version](https://badge.fury.io/rb/zhong.svg)](http://badge.fury.io/rb/zhong)
 
 Useful, reliable distributed cron. Tired of your cron-like scheduler running key jobs twice? Would you like to be able to run your cron server on multiple machines and have it "just work"? Have we got the gem for you.
 
@@ -132,13 +132,13 @@ end
 
 ## History
 
-View the [changelog](https://github.com/nickelser/zhong/blob/master/CHANGELOG.md).
+View the [changelog](https://github.com/instacart/zhong/blob/master/CHANGELOG.md).
 
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/nickelser/zhong/issues)
-- Fix bugs and [submit pull requests](https://github.com/nickelser/zhong/pulls)
+- [Report bugs](https://github.com/instacart/zhong/issues)
+- Fix bugs and [submit pull requests](https://github.com/instacart/zhong/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
